@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$<span id="totalAmount">1278</span></h5>
+                        <h5>$<span id="subTotalAmount">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="totalAmount">1278</span></h5>
                      </div>
                   </div>
                </div>
@@ -82,25 +82,25 @@
       const plusBtnIphone = document.getElementById("iphone-add");
       plusBtnIphone.addEventListener("click", function(){
 
-         plus("iphone-quantity", "currentPriceApple", 1219);
+         plus("iphone-quantity", "currentPriceApple", "subTotalAmount", 1219);
 
       });
 
       const minusBtnIphone = document.getElementById("iphone-minus");
       minusBtnIphone.addEventListener("click", function(){
          
-         minus("iphone-quantity", "currentPriceApple", 1219);
+         minus("iphone-quantity", "currentPriceApple", "subTotalAmount", 1219);
 
       })
 
       const plusBtnCase = document.getElementById("case-add");
       plusBtnCase.addEventListener("click", function(){
-         plus("case-quantity", "currentPriceCase", 59);
+         plus("case-quantity", "currentPriceCase", "subTotalAmount", 59);
       })
 
       const minusBtnCase = document.getElementById("case-minus");
       minusBtnCase.addEventListener("click", function(){
-         minus("case-quantity", "currentPriceCase", 59);
+         minus("case-quantity", "currentPriceCase", "subTotalAmount", 59);
       })
 
       // plusBtn.addEventListener("click", function(){
@@ -113,7 +113,7 @@
       //    document.getElementById("iphone-quantity").value = finalNumb;
       // })
 
-      function plus(id1, id2, price){
+      function plus(id1, id2, id3, price){
          const current = document.getElementById(id1).value;
          const currentPrice = document.getElementById(id2).innerHTML;
          const currentPriceNumb = parseFloat(currentPrice);
@@ -121,18 +121,28 @@
          //const finalNumb = currentNumb+1;
          document.getElementById(id1).value = currentNumb+1;
          document.getElementById(id2).innerHTML = currentPriceNumb+price;
+         const currentSubTotal = document.getElementById(id3).innerHTML;
+         const currentSubNumb = parseFloat(currentSubTotal);
+         document.getElementById(id3).innerHTML = currentSubNumb+price;
       }
 
-      function minus(id1, id2, price){
+      function minus(id1, id2, id3, price){
          const current = document.getElementById(id1).value;
          const currentNumb = parseFloat(current);
-         document.getElementById(id1).value = currentNumb-1;
          const currentPrice = document.getElementById(id2).innerHTML;
          const currentPriceNumb = parseFloat(currentPrice);
+         const currentSubTotal = document.getElementById(id3).innerHTML;
+         const currentSubNumb = parseFloat(currentSubTotal);
+         
+         document.getElementById(id1).value = currentNumb-1;
          document.getElementById(id2).innerHTML = currentPriceNumb-price;
+         document.getElementById(id3).innerHTML = currentSubNumb-price;
+
          if(currentNumb<=1){
             document.getElementById(id1).value = 1;
+            document.getElementById(id2).innerHTML = price;
          }
+         
       }
 
    </script>
