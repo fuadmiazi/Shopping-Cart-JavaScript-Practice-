@@ -29,7 +29,7 @@
                            <input type="text" id="iphone-quantity" class="form-control text-center" value="1">
                            <button id="iphone-add" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$<span id="currentPriceApple">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -48,7 +48,7 @@
                            <button id="case-add" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="currentPriceCase">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,7 +64,7 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$<span id="totalAmount">1278</span></h5>
                         <h5>$0</h5>
                         <h5>$1,278</h5>
                      </div>
@@ -82,25 +82,25 @@
       const plusBtnIphone = document.getElementById("iphone-add");
       plusBtnIphone.addEventListener("click", function(){
 
-         plus("iphone-quantity");
+         plus("iphone-quantity", "currentPriceApple", 1219);
 
       });
 
       const minusBtnIphone = document.getElementById("iphone-minus");
       minusBtnIphone.addEventListener("click", function(){
          
-         minus("iphone-quantity");
+         minus("iphone-quantity", "currentPriceApple", 1219);
 
       })
 
       const plusBtnCase = document.getElementById("case-add");
       plusBtnCase.addEventListener("click", function(){
-         plus("case-quantity");
+         plus("case-quantity", "currentPriceCase", 59);
       })
 
       const minusBtnCase = document.getElementById("case-minus");
       minusBtnCase.addEventListener("click", function(){
-         minus("case-quantity");
+         minus("case-quantity", "currentPriceCase", 59);
       })
 
       // plusBtn.addEventListener("click", function(){
@@ -113,17 +113,26 @@
       //    document.getElementById("iphone-quantity").value = finalNumb;
       // })
 
-      function plus(id){
-         const current = document.getElementById(id).value;
+      function plus(id1, id2, price){
+         const current = document.getElementById(id1).value;
+         const currentPrice = document.getElementById(id2).innerHTML;
+         const currentPriceNumb = parseFloat(currentPrice);
          const currentNumb = parseFloat(current);
          //const finalNumb = currentNumb+1;
-         document.getElementById(id).value = currentNumb+1;
+         document.getElementById(id1).value = currentNumb+1;
+         document.getElementById(id2).innerHTML = currentPriceNumb+price;
       }
 
-      function minus(id){
-         const current = document.getElementById(id).value;
+      function minus(id1, id2, price){
+         const current = document.getElementById(id1).value;
          const currentNumb = parseFloat(current);
-         document.getElementById(id).value = currentNumb-1;
+         document.getElementById(id1).value = currentNumb-1;
+         const currentPrice = document.getElementById(id2).innerHTML;
+         const currentPriceNumb = parseFloat(currentPrice);
+         document.getElementById(id2).innerHTML = currentPriceNumb-price;
+         if(currentNumb<=1){
+            document.getElementById(id1).value = 1;
+         }
       }
 
    </script>
